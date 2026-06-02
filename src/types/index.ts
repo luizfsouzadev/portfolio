@@ -66,3 +66,16 @@ export interface HeroContent {
 	ctas: HeroCta[];
 	socials: HeroSocial[];
 }
+
+// ── About ────────────────────────────────────────────────────────────────────
+
+export interface AboutHighlight {
+	value: string;
+	label: string;
+}
+
+export interface AboutContent {
+	heading: string;
+	paragraphs: string[];
+	highlights: AboutHighlight[];
+}

@@ -1,4 +1,5 @@
 import type { HeroContent } from '@/types';
+import { siteConfig } from '@/data/site';
 
 export const heroContent: HeroContent = {
 	greeting: "Hey, I'm",
@@ -11,7 +12,7 @@ export const heroContent: HeroContent = {
 		{ label: 'Get in Touch', href: '#contact', variant: 'outline' },
 	],
 	socials: [
-		{ label: 'GitHub', href: 'https://github.com/luizfsouzadev', icon: 'github' },
-		{ label: 'LinkedIn', href: 'https://www.linkedin.com/in/luizfsouzadev', icon: 'linkedin' },
+		{ label: 'GitHub', href: siteConfig.github, icon: 'github' },
+		{ label: 'LinkedIn', href: siteConfig.linkedin, icon: 'linkedin' },
 	],
 };
