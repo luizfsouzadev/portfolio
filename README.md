@@ -17,12 +17,25 @@
 | Layer | Technology |
 |---|---|
 | Framework | Next.js 16 (App Router, SSG) |
-| Language | TypeScript 5 |
-| Styling | TailwindCSS 4 + SCSS |
+| Language | TypeScript 5 (strict mode) |
+| Styling | TailwindCSS 4 (CSS-based config) |
+| Fonts | Syne (display) + Outfit (body) via `next/font` |
+| Icons | lucide-react (UI icons) |
 | Hosting | Vercel |
 | CI/CD | GitHub Actions |
-| Linting | ESLint + Prettier |
+| Linting | ESLint + Prettier + prettier-plugin-tailwindcss |
 | Git hooks | Husky + commitlint + lint-staged |
+
+## Design System
+
+| Token | Value |
+|---|---|
+| Accent color | `#c2410c` (orange-red) |
+| Display font | Syne — `font-display` |
+| Body font | Outfit — `font-body` |
+| Dark mode | Class-based (`.dark` on `<html>`) + system preference fallback |
+
+Tokens are defined in `src/app/globals.css` via `@theme inline` (Tailwind v4 CSS-based config). Do not use arbitrary color values — always reference the design tokens.
 
 ## Getting Started
 
@@ -34,21 +47,14 @@
 ### Installation
 
 ```bash
-# Clone the repository
 git clone https://github.com/luizfsouzadev/portfolio.git
 cd portfolio
-
-# Install dependencies
 npm install
-
-# Copy environment variables
 cp .env.example .env.local
-
-# Start the development server
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open [http://localhost:3000](http://localhost:3000).
 
 ## Scripts
 
@@ -61,34 +67,58 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 | `npm run lint:fix` | Run ESLint and auto-fix |
 | `npm run format` | Format all files with Prettier |
 | `npm run typecheck` | Run TypeScript type checking |
-| `npm run validate` | Run typecheck + lint + format check |
+| `npm run validate` | Run typecheck + lint + format check (CI gate) |
 
 ## Project Structure
 
 ```
 src/
-├── app/                  # Next.js App Router
-│   ├── layout.tsx        # Root layout with metadata
+├── app/
+│   ├── globals.css       # Design tokens (@theme), keyframes, global styles
+│   ├── layout.tsx        # Root layout — fonts, metadata, ThemeProvider
 │   └── page.tsx          # Home page (section composition)
 ├── components/
-│   ├── layout/           # Header, Footer
+│   ├── layout/           # Header (nav, theme toggle), Footer
 │   ├── sections/         # Hero, About, Experience, Projects, Skills, Contact
 │   └── ui/               # Reusable primitives (Button, Card, Badge...)
+├── contexts/             # ThemeContext (dark/light mode)
 ├── data/                 # Portfolio content — edit here to update the site
-│   ├── projects.ts
-│   ├── skills.ts
-│   └── experience.ts
+│   ├── hero.ts           # Hero section content (greeting, bio, CTAs, socials)
+│   ├── projects.ts       # Project entries
+│   ├── skills.ts         # Skill entries grouped by category
+│   └── experience.ts     # Work experience entries
 ├── hooks/                # Custom React hooks
+│   └── useActiveSection.ts  # IntersectionObserver for nav highlighting
 ├── lib/                  # Utilities (cn, formatDate, getDuration)
-└── types/                # TypeScript interfaces and types
+└── types/                # TypeScript interfaces (Project, Skill, Experience, HeroContent...)
 ```
+
+## Implementation Status
+
+| Section | Status |
+|---|---|
+| Header | ✅ Complete |
+| Hero | ✅ Complete |
+| About | 🔲 Skeleton |
+| Experience | 🔲 Skeleton |
+| Projects | 🔲 Skeleton |
+| Skills | 🔲 Skeleton |
+| Contact | 🔲 Skeleton |
+| Footer | 🔲 Skeleton |
+| Dark mode | ✅ Complete |
+| Accessibility base | ✅ Complete |
+| i18n (EN/PT) | 📋 Planned |
+
+## Planned: Internationalisation
+
+Target: English (default) and Portuguese (Brazil). Implementation will use **next-intl** with URL-based locale routing (`/` = en, `/pt` = pt-BR) for full SEO support. This requires restructuring `src/app/` to `src/app/[locale]/` and adding locale middleware — scheduled after all sections are complete.
 
 ## Commit Convention
 
-This project follows [Conventional Commits](https://www.conventionalcommits.org/):
+Follows [Conventional Commits](https://www.conventionalcommits.org/):
 
 ```
-<type>: <description in lower-case>
+<type>: <description in lower-case, max 72 chars>
 ```
 
 | Type | When to use |

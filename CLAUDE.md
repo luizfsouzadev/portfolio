@@ -46,9 +46,20 @@ When implementing visual components, apply the accent color consistently for int
 highlights, and section markers. The overall aesthetic should be clean, editorial, and professional —
 not loud or maximalist.
 
-Font pairing (to be configured in `tailwind.config.ts`):
-- Display / headings: Syne (Google Fonts)
-- Body: Outfit (Google Fonts)
+Font pairing (loaded via `next/font/google`, configured as CSS variables in `globals.css`):
+- Display / headings: Syne → `font-display` class
+- Body: Outfit → `font-body` class
+
+---
+
+## File Writing — Known Limitation
+
+The Cowork `Write` tool truncates large files silently (observed with files >~100 lines containing
+long strings like SVG paths or gradient class names). When writing large component files, use
+`mcp__workspace__bash` with a heredoc (`cat > path << 'ENDOFFILE'`) instead of the `Write` tool.
+
+Safe to use `Write` for: data files, short utilities, type files, config files.
+Use bash heredoc for: component files with SVG content, files with long className strings, any file >80 lines.
 
 ---
 
@@ -86,6 +97,18 @@ export function Section({ items }: SectionProps) {
   )
 }
 ```
+
+---
+
+## Dark Mode
+
+Dark mode is controlled via the `.dark` class on `<html>`, managed by `ThemeContext`.
+
+- `ThemeProvider` (in `src/contexts/ThemeContext.tsx`) wraps the app in `layout.tsx`
+- An inline `<script>` in `layout.tsx` sets `.dark` before hydration to avoid FOUC
+- `useTheme()` hook (from `src/hooks/useTheme.ts`) gives components access to `theme` and `setTheme`
+- CSS variables (`--background`, `--foreground`) handle most theming automatically
+- Use `dark:` Tailwind variants only for fine-grained per-element overrides
 
 ---
 
