@@ -67,6 +67,27 @@ export interface HeroContent {
 	socials: HeroSocial[];
 }
 
+// ── Education ────────────────────────────────────────────────────────────────
+
+export interface Education {
+	id: string;
+	degree: string;
+	institution: string;
+	mode?: string;
+	startDate: string;
+	endDate?: string;
+	current: boolean;
+	note?: string;
+}
+
+// ── Language ─────────────────────────────────────────────────────────────────
+
+export interface Language {
+	name: string;
+	level: string;
+	detail?: string;
+}
+
 // ── About ────────────────────────────────────────────────────────────────────
 
 export interface AboutHighlight {

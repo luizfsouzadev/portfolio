@@ -6,7 +6,7 @@ export const heroContent: HeroContent = {
 	firstName: 'Luiz Fernando',
 	lastName: 'de Souza',
 	title: 'Full-Stack Developer · Front-End Specialist',
-	bio: '2+ years building production-grade web applications for real clients. Specialized in Angular and React front-ends, with full-stack capabilities across TypeScript APIs and cloud deployments.',
+	bio: '2+ years building production-grade web and desktop applications for real clients. Specialized in Angular front-ends with React experience, and full-stack capabilities spanning TypeScript APIs, Rust back-ends, and cross-platform desktop apps via Tauri.',
 	ctas: [
 		{ label: 'View Projects', href: '#projects', variant: 'primary' },
 		{ label: 'Get in Touch', href: '#contact', variant: 'outline' },

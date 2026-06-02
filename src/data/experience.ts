@@ -5,7 +5,7 @@ export const experiences: Experience[] = [
 		id: 'agilizae',
 		role: 'Front-End Developer',
 		company: 'Agilizae Tecnologia',
-		location: 'Tambaú, SP, Brazil',
+		location: 'Remote, Brazil',
 		type: 'full-time',
 		startDate: '2023-10',
 		current: true,
@@ -26,7 +26,7 @@ export const experiences: Experience[] = [
 		startDate: '2025-11',
 		current: true,
 		description: [
-			'Founded and incorporated CRATON Software — a boutique software house focused on custom solutions for small businesses and liberal professionals.',
+			'Founded CRATON Software in November 2025 — a boutique software house focused on custom solutions for small businesses and liberal professionals. Projects dating back to 2024.',
 			'Built and deployed Simone Control — a cross-platform fiscal and inventory management desktop app — serving a production client with an active subscription.',
 			'Built Doceria Sueli — a full ERP for a confectionery business, covering stock, recipes, production, sales, and cash flow, with the entire database and API layer written in pure Rust.',
 			'Developed and deployed professional websites with SEO management for legal professionals.',

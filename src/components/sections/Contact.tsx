@@ -18,7 +18,7 @@ export function Contact(): JSX.Element {
 	return (
 		<section id='contact' aria-label='Contact' className='py-24 md:py-32'>
 			<div className='mx-auto max-w-6xl px-6'>
-				<SectionHeader number='05' label='Contact' heading="Let's work together." subheading='Open to freelance projects, front-end roles, and interesting collaborations.' />
+				<SectionHeader number='06' label='Contact' heading="Let's work together." subheading='Open to freelance projects, front-end roles, internship opportunities with international teams, and interesting collaborations.' />
 
 				<div className='max-w-lg space-y-8'>
 					<div>

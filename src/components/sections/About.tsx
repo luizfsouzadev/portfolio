@@ -1,5 +1,6 @@
 import type { JSX } from 'react';
 import { aboutContent } from '@/data/about';
+import { languages } from '@/data/languages';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import type { AboutHighlight } from '@/types';
 
@@ -18,6 +19,22 @@ export function About(): JSX.Element {
 								{p}
 							</p>
 						))}
+
+						<div className='pt-2'>
+							<p className='text-foreground/40 mb-3 font-mono text-xs font-semibold tracking-widest uppercase'>Languages</p>
+							<ul className='space-y-1.5'>
+								{languages.map((lang) => (
+									<li key={lang.name} className='font-body text-foreground/60 flex gap-2 text-sm'>
+										<span className='text-foreground/80 font-medium'>{lang.name}</span>
+										<span className='text-foreground/30'>·</span>
+										<span>
+											{lang.level}
+											{lang.detail && <span className='text-foreground/40'> ({lang.detail})</span>}
+										</span>
+									</li>
+								))}
+							</ul>
+						</div>
 					</div>
 
 					<aside aria-label='Career highlights' className='grid grid-cols-3 gap-6 self-start lg:grid-cols-1 lg:gap-8'>
