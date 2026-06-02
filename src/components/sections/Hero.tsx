@@ -1,11 +1,9 @@
-// Server Component — no interactivity needed. Entrance animations are pure CSS.
 import type { JSX } from 'react';
 import { cn } from '@/lib/utils';
 import { heroContent } from '@/data/hero';
 import type { HeroCta, HeroSocial, SocialIcon } from '@/types';
 
-// Inline SVGs for GitHub and LinkedIn.
-// lucide-react v1.x dropped brand icons; we use hand-crafted paths instead.
+// lucide-react v1.x removed brand icons — inline SVGs used for GitHub and LinkedIn
 function SocialSvg({ icon }: { icon: SocialIcon }): JSX.Element {
 	if (icon === 'github') {
 		return (
@@ -21,8 +19,6 @@ function SocialSvg({ icon }: { icon: SocialIcon }): JSX.Element {
 	);
 }
 
-// Named CSS animation-delay utilities (defined in globals.css).
-// Avoids inline styles while keeping Hero a pure Server Component.
 const ANIM: Record<string, string> = {
 	greeting: 'anim-delay-0',
 	name: 'anim-delay-1',

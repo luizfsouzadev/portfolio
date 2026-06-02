@@ -1,5 +1,3 @@
-// 'use client' is required: uses useState (mobile menu, scroll state),
-// useEffect (scroll + resize listeners), and useTheme (theme toggle).
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -23,7 +21,6 @@ const NAV_LINKS: NavLink[] = [
 	{ label: 'Contact', href: '#contact', sectionId: 'contact' },
 ];
 
-// Module-level constant — stable reference for the IntersectionObserver hook
 const SECTION_IDS = NAV_LINKS.map((l) => l.sectionId);
 
 export function Header(): JSX.Element {
@@ -34,7 +31,6 @@ export function Header(): JSX.Element {
 
 	const isDark = resolvedTheme === 'dark';
 
-	// Add background/blur on scroll
 	useEffect(() => {
 		const onScroll = (): void => setScrolled(window.scrollY > 4);
 		onScroll();
@@ -42,7 +38,6 @@ export function Header(): JSX.Element {
 		return () => window.removeEventListener('scroll', onScroll);
 	}, []);
 
-	// Close mobile menu when viewport reaches desktop breakpoint
 	useEffect(() => {
 		const onResize = (): void => {
 			if (window.innerWidth >= 768) setMenuOpen(false);
@@ -51,26 +46,19 @@ export function Header(): JSX.Element {
 		return () => window.removeEventListener('resize', onResize);
 	}, []);
 
-	const handleThemeToggle = (): void => {
-		setTheme(isDark ? 'light' : 'dark');
-	};
-
 	return (
 		<>
-			{/* Skip-to-content — visible only on keyboard focus */}
 			<a href='#main-content' className='skip-link'>
 				Skip to content
 			</a>
 
 			<header role='banner' className={cn('fixed inset-x-0 top-0 z-50 transition-all duration-300', scrolled ? 'border-foreground/5 bg-background/80 border-b shadow-sm backdrop-blur-md' : 'bg-transparent')}>
 				<div className='mx-auto flex max-w-6xl items-center justify-between px-6 py-4'>
-					{/* Logo */}
 					<a href='#hero' aria-label='Luiz Fernando de Souza — back to top' className='font-display text-lg font-semibold tracking-tight transition-opacity hover:opacity-80'>
 						Luiz Fernando
 						<span className='text-foreground/40 ml-1 font-normal'>de Souza</span>
 					</a>
 
-					{/* Desktop navigation */}
 					<nav aria-label='Site navigation' className='hidden items-center gap-8 md:flex'>
 						{NAV_LINKS.map((link) => (
 							<a
@@ -83,14 +71,15 @@ export function Header(): JSX.Element {
 						))}
 					</nav>
 
-					{/* Right-side controls */}
 					<div className='flex items-center gap-2'>
-						{/* Theme toggle */}
-						<button type='button' aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'} onClick={handleThemeToggle} className='text-foreground/60 hover:text-foreground rounded-md p-2 transition-colors'>
+						<button
+							type='button'
+							aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+							onClick={() => setTheme(isDark ? 'light' : 'dark')}
+							className='text-foreground/60 hover:text-foreground rounded-md p-2 transition-colors'>
 							{isDark ? <Sun size={18} aria-hidden /> : <Moon size={18} aria-hidden />}
 						</button>
 
-						{/* Mobile menu toggle */}
 						<button
 							type='button'
 							aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
@@ -103,7 +92,6 @@ export function Header(): JSX.Element {
 					</div>
 				</div>
 
-				{/* Mobile menu — height animates via max-h */}
 				<div id='mobile-menu' className={cn('overflow-hidden transition-all duration-300 ease-in-out md:hidden', menuOpen ? 'max-h-80' : 'max-h-0')}>
 					<nav aria-label='Mobile site navigation' className='border-foreground/5 bg-background/95 border-t px-6 pt-4 pb-6 backdrop-blur-md'>
 						<ul className='flex flex-col gap-1'>

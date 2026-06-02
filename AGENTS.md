@@ -123,6 +123,17 @@ A fallback `@media (prefers-color-scheme: dark)` handles the no-JS / system-pref
 
 ## Coding Conventions
 
+### Comments
+
+Write as few comments as possible. Well-named types and functions are self-documenting.
+
+Write a comment only when it would prevent a future mistake:
+- A non-obvious constraint the code can't express (e.g. a library caveat, a browser quirk)
+- An `eslint-disable` line — always include one line explaining why
+- An intentional deviation from the expected pattern (e.g. an omitted dependency array)
+
+Never write comments that paraphrase the code, label JSX sections, or describe what a function does when its name and types already say it.
+
 ### TypeScript
 
 - All functions must have explicit return types
