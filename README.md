@@ -99,12 +99,12 @@ src/
 |---|---|
 | Header | ✅ Complete |
 | Hero | ✅ Complete |
-| About | 🔲 Skeleton |
-| Experience | 🔲 Skeleton |
-| Projects | 🔲 Skeleton |
-| Skills | 🔲 Skeleton |
-| Contact | 🔲 Skeleton |
-| Footer | 🔲 Skeleton |
+| About | ✅ Complete |
+| Experience | ✅ Complete |
+| Projects | ✅ Complete |
+| Skills | ✅ Complete |
+| Contact | ✅ Complete |
+| Footer | ✅ Complete |
 | Dark mode | ✅ Complete |
 | Accessibility base | ✅ Complete |
 | i18n (EN/PT) | 📋 Planned |
