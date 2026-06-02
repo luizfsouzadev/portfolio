@@ -40,3 +40,29 @@ export interface Experience {
 	description: string[];
 	stack: string[];
 }
+
+// ── Hero ────────────────────────────────────────────────────────────────────
+
+export type SocialIcon = 'github' | 'linkedin';
+
+export interface HeroSocial {
+	label: string;
+	href: string;
+	icon: SocialIcon;
+}
+
+export interface HeroCta {
+	label: string;
+	href: string;
+	variant: 'primary' | 'outline';
+}
+
+export interface HeroContent {
+	greeting: string;
+	firstName: string;
+	lastName: string;
+	title: string;
+	bio: string;
+	ctas: HeroCta[];
+	socials: HeroSocial[];
+}
