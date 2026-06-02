@@ -1,0 +1,4 @@
+{
+	"conventionalCommits.promptScopes": true,
+	"conventionalCommits.scopes": ["hero", "about", "experience", "projects", "skills", "contact", "header", "footer", "ui", "data", "config", "deps", "ci"]
+}
