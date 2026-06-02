@@ -20,7 +20,6 @@
 
 /* ── Dark mode ───────────────────────────────────────────────────── */
 
-/* System preference — applies when no explicit theme is saved */
 @media (prefers-color-scheme: dark) {
 	:root:not([data-forced-theme]) {
 		--background: #0a0a0a;
@@ -28,13 +27,11 @@
 	}
 }
 
-/* Class-based dark mode — set by ThemeProvider via JS */
 :root.dark {
 	--background: #0a0a0a;
 	--foreground: #ededed;
 }
 
-/* Force light when explicitly chosen */
 :root.light {
 	--background: #ffffff;
 	--foreground: #171717;
@@ -44,7 +41,6 @@
 
 html {
 	scroll-behavior: smooth;
-	/* Offset anchor targets so they land below the fixed header */
 	scroll-padding-top: var(--header-height);
 }
 
@@ -67,7 +63,6 @@ body {
 	}
 }
 
-/* Respect user's motion preference */
 @media (prefers-reduced-motion: reduce) {
 	*,
 	*::before,
@@ -85,7 +80,6 @@ body {
 		animation: fade-in-up 0.65s ease both;
 	}
 
-	/* Staggered animation delays for Hero entrance sequence */
 	.anim-delay-0 {
 		animation-delay: 0ms;
 	}
@@ -105,19 +99,16 @@ body {
 		animation-delay: 600ms;
 	}
 
-	/* Subtle dot-grid background used in Hero */
 	.hero-grid {
 		background-image: radial-gradient(circle, currentColor 1px, transparent 1px);
 		background-size: 32px 32px;
 		opacity: 0.04;
 	}
 
-	/* Radial vignette that softens the hero grid toward the edges */
 	.bg-radial-vignette {
 		background: radial-gradient(ellipse 80% 60% at 50% 50%, transparent 40%, var(--background) 100%);
 	}
 
-	/* Skip-to-content link — visible on keyboard focus only */
 	.skip-link {
 		position: absolute;
 		left: 1rem;
@@ -137,5 +128,20 @@ body {
 
 	.skip-link:focus {
 		transform: translateY(0);
+	}
+
+	/* Theme icon visibility — CSS-driven to avoid React hydration mismatch.
+	   The FOUC script sets .dark on <html> before first paint, so this is flash-free. */
+	.theme-icon-dark {
+		display: none;
+	}
+	.theme-icon-light {
+		display: block;
+	}
+	:root.dark .theme-icon-dark {
+		display: block;
+	}
+	:root.dark .theme-icon-light {
+		display: none;
 	}
 }

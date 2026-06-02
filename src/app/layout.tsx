@@ -9,7 +9,8 @@ import './globals.css';
 const syne = Syne({ subsets: ['latin'], variable: '--font-syne', display: 'swap' });
 const outfit = Outfit({ subsets: ['latin'], variable: '--font-outfit', display: 'swap' });
 
-// Inline script — applies .dark/.light before hydration to prevent FOUC.
+// Synchronous blocking script — sets .dark/.light on <html> before first paint.
+// Placed in <body> (not <head>) so Next.js App Router treats it as server HTML.
 const themeScript = `(function(){try{var s=localStorage.getItem('theme');if(s==='dark'){document.documentElement.classList.add('dark')}else if(s==='light'){document.documentElement.classList.add('light')}else if(!s&&window.matchMedia('(prefers-color-scheme: dark)').matches){document.documentElement.classList.add('dark')}}catch(e){}})()`;
 
 export const metadata: Metadata = {
@@ -32,14 +33,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
 	return (
 		<html lang='en' className={cn(syne.variable, outfit.variable)} suppressHydrationWarning>
-			<head>
-				{/* FOUC prevention — must run before first paint */}
-				<script dangerouslySetInnerHTML={{ __html: themeScript }} />
-			</head>
 			<body className='antialiased'>
+				<script dangerouslySetInnerHTML={{ __html: themeScript }} />
 				<ThemeProvider>
 					<Header />
-					{/* tabIndex={-1} allows the skip-link to programmatically focus this element */}
 					<main id='main-content' tabIndex={-1}>
 						{children}
 					</main>

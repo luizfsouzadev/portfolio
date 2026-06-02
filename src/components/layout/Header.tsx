@@ -27,9 +27,7 @@ export function Header(): JSX.Element {
 	const [scrolled, setScrolled] = useState(false);
 	const [menuOpen, setMenuOpen] = useState(false);
 	const activeSection = useActiveSection(SECTION_IDS);
-	const { resolvedTheme, setTheme } = useTheme();
-
-	const isDark = resolvedTheme === 'dark';
+	const { setTheme } = useTheme();
 
 	useEffect(() => {
 		const onScroll = (): void => setScrolled(window.scrollY > 4);
@@ -74,10 +72,14 @@ export function Header(): JSX.Element {
 					<div className='flex items-center gap-2'>
 						<button
 							type='button'
-							aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-							onClick={() => setTheme(isDark ? 'light' : 'dark')}
+							aria-label='Toggle color theme'
+							onClick={() => {
+								const isDark = document.documentElement.classList.contains('dark');
+								setTheme(isDark ? 'light' : 'dark');
+							}}
 							className='text-foreground/60 hover:text-foreground rounded-md p-2 transition-colors'>
-							{isDark ? <Sun size={18} aria-hidden /> : <Moon size={18} aria-hidden />}
+							<Sun size={18} aria-hidden className='theme-icon-dark' />
+							<Moon size={18} aria-hidden className='theme-icon-light' />
 						</button>
 
 						<button
