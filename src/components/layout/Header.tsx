@@ -1,12 +1,13 @@
-// 'use client' is required: uses useState (mobile menu, scroll state)
-// and useEffect (scroll + resize listeners) + IntersectionObserver via the hook.
+// 'use client' is required: uses useState (mobile menu, scroll state),
+// useEffect (scroll + resize listeners), and useTheme (theme toggle).
 'use client';
 
 import { useState, useEffect } from 'react';
 import type { JSX } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useActiveSection } from '@/hooks/useActiveSection';
+import { useTheme } from '@/hooks/useTheme';
 
 interface NavLink {
 	label: string;
@@ -29,6 +30,9 @@ export function Header(): JSX.Element {
 	const [scrolled, setScrolled] = useState(false);
 	const [menuOpen, setMenuOpen] = useState(false);
 	const activeSection = useActiveSection(SECTION_IDS);
+	const { resolvedTheme, setTheme } = useTheme();
+
+	const isDark = resolvedTheme === 'dark';
 
 	// Add background/blur on scroll
 	useEffect(() => {
@@ -47,58 +51,77 @@ export function Header(): JSX.Element {
 		return () => window.removeEventListener('resize', onResize);
 	}, []);
 
+	const handleThemeToggle = (): void => {
+		setTheme(isDark ? 'light' : 'dark');
+	};
+
 	return (
-		<header role='banner' className={cn('fixed inset-x-0 top-0 z-50 transition-all duration-300', scrolled ? 'border-foreground/5 bg-background/80 border-b shadow-sm backdrop-blur-md' : 'bg-transparent')}>
-			<div className='mx-auto flex max-w-6xl items-center justify-between px-6 py-4'>
-				{/* Logo */}
-				<a href='#hero' aria-label='Luiz Fernando de Souza — back to top' className='font-display text-lg font-semibold tracking-tight transition-opacity hover:opacity-80'>
-					Luiz Fernando
-					<span className='text-foreground/40 ml-1 font-normal'>de Souza</span>
-				</a>
+		<>
+			{/* Skip-to-content — visible only on keyboard focus */}
+			<a href='#main-content' className='skip-link'>
+				Skip to content
+			</a>
 
-				{/* Desktop navigation */}
-				<nav aria-label='Site navigation' className='hidden items-center gap-8 md:flex'>
-					{NAV_LINKS.map((link) => (
-						<a
-							key={link.sectionId}
-							href={link.href}
-							aria-current={activeSection === link.sectionId ? 'page' : undefined}
-							className={cn('hover:text-accent text-sm font-medium transition-colors duration-200', activeSection === link.sectionId ? 'text-accent' : 'text-foreground/55')}>
-							{link.label}
-						</a>
-					))}
-				</nav>
+			<header role='banner' className={cn('fixed inset-x-0 top-0 z-50 transition-all duration-300', scrolled ? 'border-foreground/5 bg-background/80 border-b shadow-sm backdrop-blur-md' : 'bg-transparent')}>
+				<div className='mx-auto flex max-w-6xl items-center justify-between px-6 py-4'>
+					{/* Logo */}
+					<a href='#hero' aria-label='Luiz Fernando de Souza — back to top' className='font-display text-lg font-semibold tracking-tight transition-opacity hover:opacity-80'>
+						Luiz Fernando
+						<span className='text-foreground/40 ml-1 font-normal'>de Souza</span>
+					</a>
 
-				{/* Mobile menu toggle */}
-				<button
-					type='button'
-					aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
-					aria-expanded={menuOpen}
-					aria-controls='mobile-menu'
-					className='text-foreground/60 hover:text-foreground rounded-md p-2 transition-colors md:hidden'
-					onClick={() => setMenuOpen((prev) => !prev)}>
-					{menuOpen ? <X size={20} aria-hidden /> : <Menu size={20} aria-hidden />}
-				</button>
-			</div>
-
-			{/* Mobile menu — height animates via max-h */}
-			<div id='mobile-menu' className={cn('overflow-hidden transition-all duration-300 ease-in-out md:hidden', menuOpen ? 'max-h-80' : 'max-h-0')}>
-				<nav aria-label='Mobile site navigation' className='border-foreground/5 bg-background/95 border-t px-6 pt-4 pb-6 backdrop-blur-md'>
-					<ul className='flex flex-col gap-1'>
+					{/* Desktop navigation */}
+					<nav aria-label='Site navigation' className='hidden items-center gap-8 md:flex'>
 						{NAV_LINKS.map((link) => (
-							<li key={link.sectionId}>
-								<a
-									href={link.href}
-									aria-current={activeSection === link.sectionId ? 'page' : undefined}
-									className={cn('block rounded-md px-2 py-2.5 text-base font-medium transition-colors duration-200', activeSection === link.sectionId ? 'text-accent' : 'text-foreground/60 hover:text-foreground')}
-									onClick={() => setMenuOpen(false)}>
-									{link.label}
-								</a>
-							</li>
+							<a
+								key={link.sectionId}
+								href={link.href}
+								aria-current={activeSection === link.sectionId ? 'page' : undefined}
+								className={cn('hover:text-accent text-sm font-medium transition-colors duration-200', activeSection === link.sectionId ? 'text-accent' : 'text-foreground/55')}>
+								{link.label}
+							</a>
 						))}
-					</ul>
-				</nav>
-			</div>
-		</header>
+					</nav>
+
+					{/* Right-side controls */}
+					<div className='flex items-center gap-2'>
+						{/* Theme toggle */}
+						<button type='button' aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'} onClick={handleThemeToggle} className='text-foreground/60 hover:text-foreground rounded-md p-2 transition-colors'>
+							{isDark ? <Sun size={18} aria-hidden /> : <Moon size={18} aria-hidden />}
+						</button>
+
+						{/* Mobile menu toggle */}
+						<button
+							type='button'
+							aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+							aria-expanded={menuOpen}
+							aria-controls='mobile-menu'
+							className='text-foreground/60 hover:text-foreground rounded-md p-2 transition-colors md:hidden'
+							onClick={() => setMenuOpen((prev) => !prev)}>
+							{menuOpen ? <X size={20} aria-hidden /> : <Menu size={20} aria-hidden />}
+						</button>
+					</div>
+				</div>
+
+				{/* Mobile menu — height animates via max-h */}
+				<div id='mobile-menu' className={cn('overflow-hidden transition-all duration-300 ease-in-out md:hidden', menuOpen ? 'max-h-80' : 'max-h-0')}>
+					<nav aria-label='Mobile site navigation' className='border-foreground/5 bg-background/95 border-t px-6 pt-4 pb-6 backdrop-blur-md'>
+						<ul className='flex flex-col gap-1'>
+							{NAV_LINKS.map((link) => (
+								<li key={link.sectionId}>
+									<a
+										href={link.href}
+										aria-current={activeSection === link.sectionId ? 'page' : undefined}
+										className={cn('block rounded-md px-2 py-2.5 text-base font-medium transition-colors duration-200', activeSection === link.sectionId ? 'text-accent' : 'text-foreground/60 hover:text-foreground')}
+										onClick={() => setMenuOpen(false)}>
+										{link.label}
+									</a>
+								</li>
+							))}
+						</ul>
+					</nav>
+				</div>
+			</header>
+		</>
 	);
 }

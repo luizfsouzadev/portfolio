@@ -10,13 +10,13 @@ import { experiences } from '@/data/experience';
 
 export default function Home() {
 	return (
-		<main>
+		<>
 			<Hero />
 			<About />
 			<Experience experiences={experiences} />
 			<Projects projects={projects} />
 			<Skills skills={skills} />
 			<Contact />
-		</main>
+		</>
 	);
 }
