@@ -2,24 +2,36 @@ import type { Project } from '@/types';
 
 export const projects: Project[] = [
 	{
-		id: 'agilizae-menu',
-		name: 'Agilizae Menu',
-		description: 'Full-featured tablet menu application for the food & beverage industry, built from scratch as the sole developer.',
-		longDescription: 'End-to-end B2B product for restaurants and bars, delivering real-time menu management and a seamless customer experience. Currently live with active paying clients and directly contributing to company revenue growth.',
-		stack: ['Angular', 'Ionic', 'TypeScript', 'TailwindCSS', 'Capacitor', 'Node.js'],
+		id: 'doceria-sueli',
+		name: 'Doceria Sueli ERP',
+		description: 'Full ERP system for a confectionery business — from inventory and recipes to production, sales, and cash flow.',
+		longDescription:
+			'Complete ERP built for a confectionery establishment. Covers the full operational cycle: stock and packaging control, recipe management, production planning, product separation, customer management, sales, and cash flow. The entire database and API layer is written in pure Rust, delivering an extremely robust, modern, and compact system.',
+		stack: ['Tauri', 'Rust', 'Angular', 'TailwindCSS', 'SQLite', 'NX'],
 		status: 'production',
 		featured: true,
-		startDate: '2023-10',
+		startDate: '2026-05',
 	},
 	{
 		id: 'simone-control',
 		name: 'Simone Control',
 		description: 'Cross-platform fiscal and inventory management desktop application for small retail businesses.',
-		longDescription: 'Built as the founding product of CRATON Software. Handles inventory control, fiscal notes (NF-e), and financial reporting. Currently in production with an active paying client.',
+		longDescription: 'Handles inventory control, fiscal notes (NF-e), and financial reporting. Currently in production with an active paying client under CRATON Software.',
 		stack: ['Tauri', 'Rust', 'Angular', 'TypeScript', 'PostgreSQL', 'Node.js'],
 		status: 'production',
 		featured: true,
 		startDate: '2023-01',
+	},
+	{
+		id: 'agilizae-menu',
+		name: 'Agilizae Menu',
+		description: 'Tablet application for restaurants where customers can browse the digital menu and place orders directly from the table.',
+		longDescription:
+			'Built from scratch as sole developer at Agilizae Tecnologia. A tablet-based complement to the company flagship management platform — customers browse items and place orders at the table in real time. Currently live with active clients.',
+		stack: ['Angular', 'Ionic', 'TypeScript', 'TailwindCSS', 'Capacitor', 'Node.js'],
+		status: 'production',
+		featured: false,
+		startDate: '2023-10',
 	},
 	{
 		id: 'dra-maria-fernanda',
