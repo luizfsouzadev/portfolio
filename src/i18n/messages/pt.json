@@ -1,0 +1,172 @@
+{
+	"meta": {
+		"title": "Luiz Fernando de Souza — Desenvolvedor Full-Stack",
+		"description": "Desenvolvedor Full-Stack com foco em front-end e mais de 2 anos de experiência profissional. Desenvolvendo aplicações de nível de produção com Angular, React, TypeScript e mais."
+	},
+	"nav": {
+		"about": "Sobre",
+		"experience": "Experiência",
+		"projects": "Projetos",
+		"skills": "Habilidades",
+		"education": "Formação",
+		"contact": "Contato",
+		"backToTop": "Luiz Fernando de Souza — voltar ao topo",
+		"skipToContent": "Pular para o conteúdo",
+		"toggleTheme": "Alternar tema de cores",
+		"openMenu": "Abrir menu de navegação",
+		"closeMenu": "Fechar menu de navegação"
+	},
+	"hero": {
+		"greeting": "Olá, sou",
+		"title": "Desenvolvedor Full-Stack · Especialista Front-End",
+		"bio": "2+ anos desenvolvendo aplicações web e desktop de nível de produção para clientes reais. Especializado em front-end Angular com experiência em React, e capacidades full-stack abrangendo APIs em TypeScript, back-ends em Rust e apps desktop multiplataforma via Tauri.",
+		"cta": {
+			"projects": "Ver Projetos",
+			"contact": "Entrar em Contato"
+		},
+		"social": {
+			"github": "Perfil no GitHub (abre em nova aba)",
+			"linkedin": "Perfil no LinkedIn (abre em nova aba)"
+		}
+	},
+	"about": {
+		"sectionLabel": "Sobre",
+		"heading": "Um pouco sobre mim.",
+		"paragraphs": [
+			"Sou um Desenvolvedor Full-Stack brasileiro com foco em front-end e mais de dois anos de experiência profissional. Desenvolvo aplicações de nível de produção — de menus digitais para tablets a ferramentas desktop multiplataforma — entregues a clientes pagantes.",
+			"Atualmente trabalho como o único desenvolvedor front-end na Agilizae Tecnologia, onde desenvolvi do zero um aplicativo completo de menu para tablets e liderei duas grandes refatorações da plataforma. Paralelamente, dirijo a CRATON Software, uma software house boutique que fundei em novembro de 2025, desenvolvendo soluções sob medida para pequenas empresas.",
+			"Minha stack do dia a dia é Angular no front, com experiência em React, e capacidades full-stack abrangendo APIs em TypeScript, back-ends em Rust e apps desktop multiplataforma via Tauri."
+		],
+		"highlights": {
+			"years": "anos de experiência",
+			"projects": "projetos em produção",
+			"clients": "clientes ativos"
+		},
+		"languagesLabel": "Idiomas",
+		"languages": [
+			{
+				"name": "Português",
+				"level": "Nativo"
+			},
+			{
+				"name": "Inglês",
+				"level": "Avançado",
+				"detail": "leitura e compreensão oral · Intermediário superior na escrita e fala"
+			},
+			{
+				"name": "Espanhol",
+				"level": "Básico"
+			},
+			{
+				"name": "Italiano",
+				"level": "Básico"
+			}
+		]
+	},
+	"experience": {
+		"sectionLabel": "Experiência",
+		"heading": "Onde trabalhei.",
+		"present": "Presente",
+		"agilizae": {
+			"role": "Desenvolvedor Front-End",
+			"description": [
+				"Desenvolvedor único do Agilizae Menu — um aplicativo tablet para restaurantes que permite aos clientes navegar pelo cardápio e fazer pedidos diretamente da mesa, complementando a plataforma de gestão principal da empresa.",
+				"Liderou dois ciclos completos de refatoração (v5 e v6) da plataforma web principal, alcançando ~50% de melhora nos tempos de resposta e ~25% de redução no tamanho do bundle.",
+				"Implementou o ThemeService centralizado com Angular Signals e Capacitor Preferences, resolvendo um conflito crítico de compatibilidade entre Ionic e TailwindCSS.",
+				"Props e iniciou a migração para arquitetura orientada a domínios (features/), melhorando a manutenibilidade a longo prazo."
+			]
+		},
+		"craton": {
+			"role": "Fundador e Desenvolvedor Principal",
+			"description": [
+				"Fundou a CRATON Software em novembro de 2025 — uma software house boutique focada em soluções personalizadas para pequenas empresas e profissionais liberais. Projetos desde 2024.",
+				"Desenvolveu e implantou o Simone Control — um aplicativo desktop multiplataforma de gestão fiscal e de estoque — servindo um cliente em produção com assinatura ativa.",
+				"Desenvolveu a Doceria Sueli — um ERP completo para uma confeitaria, cobrindo estoque, receitas, produção, vendas e fluxo de caixa, com toda a camada de banco de dados e API escrita em Rust puro.",
+				"Desenvolveu e implantou sites profissionais com gestão de SEO para profissionais da área jurídica."
+			]
+		}
+	},
+	"projects": {
+		"sectionLabel": "Projetos",
+		"heading": "O que desenvolvi.",
+		"status": {
+			"production": "Produção",
+			"development": "Em Desenvolvimento",
+			"archived": "Arquivado"
+		},
+		"sourceLabel": "código-fonte",
+		"liveLabel": "ver ao vivo",
+		"doceria-sueli": {
+			"name": "Doceria Sueli ERP",
+			"description": "Sistema ERP completo para uma confeitaria — do controle de estoque e receitas à produção, vendas e fluxo de caixa.",
+			"longDescription": "ERP completo desenvolvido para uma confeitaria. Cobre o ciclo operacional completo: controle de estoque e embalagens, gerenciamento de receitas, planejamento de produção, separação de produtos, gerenciamento de clientes, vendas e fluxo de caixa. Toda a camada de banco de dados e API é escrita em Rust puro, entregando um sistema extremamente robusto, moderno e compacto."
+		},
+		"simone-control": {
+			"name": "Simone Control",
+			"description": "Aplicativo desktop multiplataforma de gestão fiscal e de estoque para pequenos negócios.",
+			"longDescription": "Gerencia controle de estoque, notas fiscais (NF-e) e relatórios financeiros. Atualmente em produção com um cliente pagante ativo na CRATON Software. Originalmente desenvolvido com ReactJS, JavaScript e MySQL. Reescrito na v2 com Tauri, Rust, Angular e PostgreSQL para melhor desempenho e distribuição multiplataforma."
+		},
+		"agilizae-menu": {
+			"name": "Agilizae Menu",
+			"description": "Aplicativo tablet para restaurantes onde os clientes podem navegar pelo cardápio digital e fazer pedidos diretamente da mesa.",
+			"longDescription": "Desenvolvido do zero como único desenvolvedor na Agilizae Tecnologia. Um complemento em tablet para a plataforma de gestão principal da empresa — os clientes navegam pelos itens e fazem pedidos na mesa em tempo real. Atualmente em uso com clientes ativos."
+		},
+		"dra-maria-fernanda": {
+			"name": "Dra. Maria Fernanda Vetere",
+			"description": "Site profissional para uma advogada em exercício, com gestão de SEO e integração com o Google Search Console."
+		},
+		"portfolio": {
+			"name": "luiz.craton.com.br",
+			"description": "Portfólio pessoal desenvolvido com Next.js 16, TypeScript e TailwindCSS 4. Com CI/CD via GitHub Actions, gates de qualidade de código automatizados e deploy em produção no Vercel.",
+			"longDescription": "Arquitetado do zero com ferramentas profissionais: ESLint, Prettier, hooks Git com Husky e commitlint, lint-staged e um pipeline de CI completo. A camada de dados é totalmente tipada e desacoplada dos componentes."
+		},
+		"jovens-advogados": {
+			"name": "Sistema de Gestão para Escritório Jurídico",
+			"description": "Sistema de gestão web para jovens advogados, desenvolvido como projeto de extensão acadêmica na Universidade Cruzeiro do Sul."
+		}
+	},
+	"skills": {
+		"sectionLabel": "Habilidades",
+		"heading": "Com o que trabalho.",
+		"subheading": "Proficiência é relativa — cada tecnologia listada aqui foi utilizada em produção de alguma forma.",
+		"categories": {
+			"languages": "Linguagens",
+			"frameworks": "Frameworks & Runtimes",
+			"styling": "Estilização",
+			"databases": "Bancos de Dados",
+			"devops": "DevOps & Cloud",
+			"tools": "Ferramentas"
+		},
+		"levels": {
+			"proficient": "Proficiente",
+			"experienced": "Experiente",
+			"familiar": "Familiar"
+		}
+	},
+	"education": {
+		"sectionLabel": "Formação",
+		"heading": "Formação acadêmica.",
+		"present": "Presente",
+		"cruzeiro-do-sul": {
+			"degree": "Bacharelado em Ciência da Computação",
+			"mode": "Ensino a Distância (EAD)",
+			"note": "Atualmente no 5º semestre · Conclusão prevista: dez/2027"
+		},
+		"ifsuldeminas": {
+			"degree": "Técnico em Informática (Ensino Médio Integrado)",
+			"note": "Monitor Acadêmico de Física · Competições de programação 2018–2019"
+		}
+	},
+	"contact": {
+		"sectionLabel": "Contato",
+		"heading": "Vamos trabalhar juntos.",
+		"subheading": "Aberto a projetos freelance, vagas front-end, oportunidades de estágio com equipes internacionais e colaborações interessantes.",
+		"emailLabel": "E-mail",
+		"elsewhereLabel": "Em outros lugares",
+		"copyEmail": "Copiar endereço de e-mail",
+		"emailCopied": "E-mail copiado"
+	},
+	"footer": {
+		"backToTop": "Voltar ao topo"
+	}
+}

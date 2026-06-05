@@ -1,4 +1,5 @@
 import type { JSX } from 'react';
+import { getTranslations } from 'next-intl/server';
 import { ExternalLink } from 'lucide-react';
 import type { Project, ProjectStatus } from '@/types';
 import { Badge } from '@/components/ui/Badge';
@@ -11,57 +12,62 @@ const STATUS_STYLES: Record<ProjectStatus, string> = {
 	archived: 'bg-foreground/5 text-foreground/40',
 };
 
-const STATUS_LABEL: Record<ProjectStatus, string> = {
-	production: 'Production',
-	development: 'In Development',
-	archived: 'Archived',
-};
+interface ProjectMessage {
+	name: string;
+	description: string;
+	longDescription?: string;
+}
 
 interface ProjectsProps {
 	projects: Project[];
 }
 
-export function Projects({ projects }: ProjectsProps): JSX.Element {
+export async function Projects({ projects }: ProjectsProps): Promise<JSX.Element> {
+	const t = await getTranslations('projects');
 	const featured = projects.filter((p) => p.featured);
 	const rest = projects.filter((p) => !p.featured);
 	const ordered = [...featured, ...rest];
 
 	return (
-		<section id='projects' aria-label='Projects' className='py-24 md:py-32'>
+		<section id='projects' aria-label={t('sectionLabel')} className='py-24 md:py-32'>
 			<div className='mx-auto max-w-6xl px-6'>
-				<SectionHeader number='03' label='Projects' heading='Things I have shipped.' />
+				<SectionHeader number='03' label={t('sectionLabel')} heading={t('heading')} />
 
 				<div className='grid gap-6 sm:grid-cols-2'>
-					{ordered.map((project) => (
-						<article key={project.id} className='border-foreground/8 group hover:border-accent/30 flex flex-col rounded-lg border p-6 transition-colors'>
-							<div className='mb-4 flex items-start justify-between gap-4'>
-								<Badge className={cn('shrink-0', STATUS_STYLES[project.status])}>{STATUS_LABEL[project.status]}</Badge>
-								<div className='flex gap-3'>
-									{project.githubUrl && (
-										<a href={project.githubUrl} target='_blank' rel='noopener noreferrer' aria-label={`${project.name} source code`} className='text-foreground/30 hover:text-foreground transition-colors'>
-											<ExternalLink size={15} aria-hidden />
-										</a>
-									)}
-									{project.url && (
-										<a href={project.url} target='_blank' rel='noopener noreferrer' aria-label={`${project.name} live site`} className='text-foreground/30 hover:text-accent transition-colors'>
-											<ExternalLink size={15} aria-hidden />
-										</a>
-									)}
+					{ordered.map((project) => {
+						const msg = t.raw(project.id) as ProjectMessage;
+						const displayText = msg.longDescription ?? msg.description;
+						return (
+							<article key={project.id} className='border-foreground/8 group hover:border-accent/30 flex flex-col rounded-lg border p-6 transition-colors'>
+								<div className='mb-4 flex items-start justify-between gap-4'>
+									<Badge className={cn('shrink-0', STATUS_STYLES[project.status])}>{t(`status.${project.status}`)}</Badge>
+									<div className='flex gap-3'>
+										{project.githubUrl && (
+											<a href={project.githubUrl} target='_blank' rel='noopener noreferrer' aria-label={`${msg.name} ${t('sourceLabel')}`} className='text-foreground/30 hover:text-foreground transition-colors'>
+												<ExternalLink size={15} aria-hidden />
+											</a>
+										)}
+										{project.url && (
+											<a href={project.url} target='_blank' rel='noopener noreferrer' aria-label={`${msg.name} ${t('liveLabel')}`} className='text-foreground/30 hover:text-accent transition-colors'>
+												<ExternalLink size={15} aria-hidden />
+											</a>
+										)}
+									</div>
 								</div>
-							</div>
 
-							<h3 className='font-display mb-2 text-lg font-semibold'>{project.name}</h3>
-							<p className='font-body text-foreground/55 mb-4 flex-1 text-sm leading-relaxed'>{project.longDescription ?? project.description}</p>
+								<h3 className='font-display mb-2 text-lg font-semibold'>{msg.name}</h3>
+								<p className='font-body text-foreground/55 mb-4 flex-1 text-sm leading-relaxed'>{displayText}</p>
 
-							<div className='flex flex-wrap gap-2'>
-								{project.stack.map((tech) => (
-									<Badge key={tech} className='border-foreground/10 text-foreground/40 border'>
-										{tech}
-									</Badge>
-								))}
-							</div>
-						</article>
-					))}
+								<div className='flex flex-wrap gap-2'>
+									{project.stack.map((tech) => (
+										<Badge key={tech} className='border-foreground/10 text-foreground/40 border'>
+											{tech}
+										</Badge>
+									))}
+								</div>
+							</article>
+						);
+					})}
 				</div>
 			</div>
 		</section>

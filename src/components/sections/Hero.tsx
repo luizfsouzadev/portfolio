@@ -1,7 +1,8 @@
 import type { JSX } from 'react';
+import { getTranslations } from 'next-intl/server';
 import { cn } from '@/lib/utils';
 import { heroContent } from '@/data/hero';
-import type { HeroCta, HeroSocial, SocialIcon } from '@/types';
+import type { SocialIcon } from '@/types';
 
 // lucide-react v1.x removed brand icons — inline SVGs used for GitHub and LinkedIn
 function SocialSvg({ icon }: { icon: SocialIcon }): JSX.Element {
@@ -28,8 +29,9 @@ const ANIM: Record<string, string> = {
 	socials: 'anim-delay-5',
 };
 
-export function Hero(): JSX.Element {
-	const { greeting, firstName, lastName, title, bio, ctas, socials } = heroContent;
+export async function Hero(): Promise<JSX.Element> {
+	const t = await getTranslations('hero');
+	const { ctas, socials } = heroContent;
 
 	return (
 		<section id='hero' aria-label='Introduction' className='relative flex min-h-screen items-center overflow-hidden'>
@@ -40,45 +42,46 @@ export function Hero(): JSX.Element {
 				<div className='max-w-3xl'>
 					<p className={cn('animate-fade-up font-body text-accent mb-5 inline-flex items-center gap-3 text-sm font-medium tracking-widest uppercase', ANIM.greeting)}>
 						<span className='bg-accent block h-px w-8' aria-hidden='true' />
-						{greeting}
+						{t('greeting')}
 					</p>
 
 					<h1 className={cn('animate-fade-up font-display mb-6 text-5xl leading-tight font-bold tracking-tight sm:text-7xl lg:text-8xl', ANIM.name)}>
-						{firstName}
+						Luiz Fernando
 						<br />
-						<span className='text-accent/75'>{lastName}</span>
+						<span className='text-accent/75'>de Souza</span>
 					</h1>
 
-					<p className={cn('animate-fade-up font-body text-foreground/60 mb-6 text-lg font-medium sm:text-xl', ANIM.title)}>{title}</p>
+					<p className={cn('animate-fade-up font-body text-foreground/60 mb-6 text-lg font-medium sm:text-xl', ANIM.title)}>{t('title')}</p>
 
-					<p className={cn('animate-fade-up font-body text-foreground/50 mb-10 max-w-xl text-base leading-relaxed sm:text-lg', ANIM.bio)}>{bio}</p>
+					<p className={cn('animate-fade-up font-body text-foreground/50 mb-10 max-w-xl text-base leading-relaxed sm:text-lg', ANIM.bio)}>{t('bio')}</p>
 
 					<div className={cn('animate-fade-up mb-10 flex flex-wrap gap-4', ANIM.ctas)}>
-						{ctas.map((cta: HeroCta) => {
+						{ctas.map((cta) => {
+							const label = cta.variant === 'primary' ? t('cta.projects') : t('cta.contact');
 							if (cta.variant === 'primary') {
 								return (
 									<a
-										key={cta.label}
+										key={cta.href}
 										href={cta.href}
 										className='bg-accent font-body focus-visible:outline-accent inline-flex items-center rounded-md px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2'>
-										{cta.label}
+										{label}
 									</a>
 								);
 							}
 							return (
 								<a
-									key={cta.label}
+									key={cta.href}
 									href={cta.href}
 									className='border-foreground/20 font-body text-foreground/70 hover:border-accent hover:text-accent focus-visible:outline-accent inline-flex items-center rounded-md border px-6 py-3 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2'>
-									{cta.label}
+									{label}
 								</a>
 							);
 						})}
 					</div>
 
 					<div className={cn('animate-fade-up flex items-center gap-5', ANIM.socials)}>
-						{socials.map((social: HeroSocial) => (
-							<a key={social.label} href={social.href} target='_blank' rel='noopener noreferrer' aria-label={social.label + ' profile (opens in new tab)'} className='text-foreground/40 hover:text-accent transition-colors'>
+						{socials.map((social) => (
+							<a key={social.href} href={social.href} target='_blank' rel='noopener noreferrer' aria-label={t(`social.${social.icon}`)} className='text-foreground/40 hover:text-accent transition-colors'>
 								<SocialSvg icon={social.icon} />
 							</a>
 						))}

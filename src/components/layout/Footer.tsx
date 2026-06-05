@@ -1,7 +1,9 @@
 import type { JSX } from 'react';
+import { getTranslations } from 'next-intl/server';
 import { siteConfig } from '@/data/site';
 
-export function Footer(): JSX.Element {
+export async function Footer(): Promise<JSX.Element> {
+	const t = await getTranslations('footer');
 	const year = new Date().getFullYear();
 
 	return (
@@ -17,7 +19,7 @@ export function Footer(): JSX.Element {
 						LinkedIn
 					</a>
 					<a href='#hero' className='font-body text-foreground/30 hover:text-accent text-sm transition-colors'>
-						Back to top
+						{t('backToTop')}
 					</a>
 				</div>
 			</div>

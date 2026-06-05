@@ -2,9 +2,6 @@ export type ProjectStatus = 'production' | 'development' | 'archived';
 
 export interface Project {
 	id: string;
-	name: string;
-	description: string;
-	longDescription?: string;
 	stack: string[];
 	status: ProjectStatus;
 	url?: string;
@@ -29,7 +26,6 @@ export type EmploymentType = 'full-time' | 'part-time' | 'freelance' | 'internsh
 
 export interface Experience {
 	id: string;
-	role: string;
 	company: string;
 	companyUrl?: string;
 	location: string;
@@ -37,7 +33,6 @@ export interface Experience {
 	startDate: string;
 	endDate?: string;
 	current: boolean;
-	description: string[];
 	stack: string[];
 }
 
@@ -52,17 +47,11 @@ export interface HeroSocial {
 }
 
 export interface HeroCta {
-	label: string;
 	href: string;
 	variant: 'primary' | 'outline';
 }
 
 export interface HeroContent {
-	greeting: string;
-	firstName: string;
-	lastName: string;
-	title: string;
-	bio: string;
 	ctas: HeroCta[];
 	socials: HeroSocial[];
 }
@@ -71,13 +60,21 @@ export interface HeroContent {
 
 export interface Education {
 	id: string;
-	degree: string;
 	institution: string;
-	mode?: string;
 	startDate: string;
 	endDate?: string;
 	current: boolean;
-	note?: string;
+}
+
+// ── About ────────────────────────────────────────────────────────────────────
+
+export interface AboutHighlight {
+	key: string;
+	value: string;
+}
+
+export interface AboutContent {
+	highlights: AboutHighlight[];
 }
 
 // ── Language ─────────────────────────────────────────────────────────────────
@@ -86,17 +83,4 @@ export interface Language {
 	name: string;
 	level: string;
 	detail?: string;
-}
-
-// ── About ────────────────────────────────────────────────────────────────────
-
-export interface AboutHighlight {
-	value: string;
-	label: string;
-}
-
-export interface AboutContent {
-	heading: string;
-	paragraphs: string[];
-	highlights: AboutHighlight[];
 }

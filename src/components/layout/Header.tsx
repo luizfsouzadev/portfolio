@@ -3,28 +3,22 @@
 import { useState, useEffect } from 'react';
 import type { JSX } from 'react';
 import { Menu, X, Sun, Moon } from 'lucide-react';
+import { useTranslations, useLocale } from 'next-intl';
 import { cn } from '@/lib/utils';
 import { useActiveSection } from '@/hooks/useActiveSection';
 import { useTheme } from '@/hooks/useTheme';
+import { useRouter, usePathname } from '@/i18n/navigation';
 
-interface NavLink {
-	label: string;
-	href: string;
-	sectionId: string;
-}
+const SECTION_IDS = ['about', 'experience', 'projects', 'skills', 'education', 'contact'];
 
-const NAV_LINKS: NavLink[] = [
-	{ label: 'About', href: '#about', sectionId: 'about' },
-	{ label: 'Experience', href: '#experience', sectionId: 'experience' },
-	{ label: 'Projects', href: '#projects', sectionId: 'projects' },
-	{ label: 'Skills', href: '#skills', sectionId: 'skills' },
-	{ label: 'Education', href: '#education', sectionId: 'education' },
-	{ label: 'Contact', href: '#contact', sectionId: 'contact' },
-];
-
-const SECTION_IDS = NAV_LINKS.map((l) => l.sectionId);
+const LOCALES = ['en', 'pt'] as const;
 
 export function Header(): JSX.Element {
+	const t = useTranslations('nav');
+	const locale = useLocale();
+	const router = useRouter();
+	const pathname = usePathname();
+
 	const [scrolled, setScrolled] = useState(false);
 	const [menuOpen, setMenuOpen] = useState(false);
 	const activeSection = useActiveSection(SECTION_IDS);
@@ -45,21 +39,27 @@ export function Header(): JSX.Element {
 		return () => window.removeEventListener('resize', onResize);
 	}, []);
 
+	const navLinks = SECTION_IDS.map((id) => ({
+		sectionId: id,
+		href: `#${id}`,
+		label: t(id as Parameters<typeof t>[0]),
+	}));
+
 	return (
 		<>
 			<a href='#main-content' className='skip-link'>
-				Skip to content
+				{t('skipToContent')}
 			</a>
 
 			<header role='banner' className={cn('fixed inset-x-0 top-0 z-50 transition-all duration-300', scrolled ? 'border-foreground/5 bg-background/80 border-b shadow-sm backdrop-blur-md' : 'bg-transparent')}>
 				<div className='mx-auto flex max-w-6xl items-center justify-between px-6 py-4'>
-					<a href='#hero' aria-label='Luiz Fernando de Souza — back to top' className='font-display text-lg font-semibold tracking-tight transition-opacity hover:opacity-80'>
+					<a href='#hero' aria-label={t('backToTop')} className='font-display text-lg font-semibold tracking-tight transition-opacity hover:opacity-80'>
 						Luiz Fernando
 						<span className='text-foreground/40 ml-1 font-normal'>de Souza</span>
 					</a>
 
 					<nav aria-label='Site navigation' className='hidden items-center gap-8 md:flex'>
-						{NAV_LINKS.map((link) => (
+						{navLinks.map((link) => (
 							<a
 								key={link.sectionId}
 								href={link.href}
@@ -70,10 +70,25 @@ export function Header(): JSX.Element {
 						))}
 					</nav>
 
-					<div className='flex items-center gap-2'>
+					<div className='flex items-center gap-1'>
+						<div className='text-foreground/40 mr-1 flex items-center gap-0.5 font-mono text-xs font-medium'>
+							{LOCALES.map((loc, i) => (
+								<span key={loc} className='flex items-center'>
+									{i > 0 && <span className='text-foreground/20 mx-1'>|</span>}
+									<button
+										type='button'
+										onClick={() => router.replace(pathname, { locale: loc })}
+										aria-label={`Switch to ${loc === 'en' ? 'English' : 'Português'}`}
+										className={cn('rounded px-1 py-0.5 uppercase transition-colors', locale === loc ? 'text-accent font-semibold' : 'hover:text-foreground/70')}>
+										{loc}
+									</button>
+								</span>
+							))}
+						</div>
+
 						<button
 							type='button'
-							aria-label='Toggle color theme'
+							aria-label={t('toggleTheme')}
 							onClick={() => {
 								const isDark = document.documentElement.classList.contains('dark');
 								setTheme(isDark ? 'light' : 'dark');
@@ -85,7 +100,7 @@ export function Header(): JSX.Element {
 
 						<button
 							type='button'
-							aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+							aria-label={menuOpen ? t('closeMenu') : t('openMenu')}
 							aria-expanded={menuOpen}
 							aria-controls='mobile-menu'
 							className='text-foreground/60 hover:text-foreground rounded-md p-2 transition-colors md:hidden'
@@ -95,10 +110,10 @@ export function Header(): JSX.Element {
 					</div>
 				</div>
 
-				<div id='mobile-menu' className={cn('overflow-hidden transition-all duration-300 ease-in-out md:hidden', menuOpen ? 'max-h-80' : 'max-h-0')}>
+				<div id='mobile-menu' className={cn('overflow-hidden transition-all duration-300 ease-in-out md:hidden', menuOpen ? 'max-h-96' : 'max-h-0')}>
 					<nav aria-label='Mobile site navigation' className='border-foreground/5 bg-background/95 border-t px-6 pt-4 pb-6 backdrop-blur-md'>
 						<ul className='flex flex-col gap-1'>
-							{NAV_LINKS.map((link) => (
+							{navLinks.map((link) => (
 								<li key={link.sectionId}>
 									<a
 										href={link.href}
