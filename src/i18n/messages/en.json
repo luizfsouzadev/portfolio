@@ -1,0 +1,159 @@
+{
+	"meta": {
+		"title": "Luiz Fernando de Souza — Full-Stack Developer",
+		"description": "Full-Stack Developer specializing in front-end with 2+ years of professional experience. Building production-grade applications with Angular, React, TypeScript, and more."
+	},
+	"nav": {
+		"about": "About",
+		"experience": "Experience",
+		"projects": "Projects",
+		"skills": "Skills",
+		"education": "Education",
+		"contact": "Contact",
+		"backToTop": "Luiz Fernando de Souza — back to top",
+		"skipToContent": "Skip to content",
+		"toggleTheme": "Toggle color theme",
+		"openMenu": "Open navigation menu",
+		"closeMenu": "Close navigation menu"
+	},
+	"hero": {
+		"greeting": "Hey, I'm",
+		"title": "Full-Stack Developer · Front-End Specialist",
+		"bio": "2+ years building production-grade web and desktop applications for real clients. Specialized in Angular front-ends with React experience, and full-stack capabilities spanning TypeScript APIs, Rust back-ends, and cross-platform desktop apps via Tauri.",
+		"cta": {
+			"projects": "View Projects",
+			"contact": "Get in Touch"
+		},
+		"social": {
+			"github": "GitHub profile (opens in new tab)",
+			"linkedin": "LinkedIn profile (opens in new tab)"
+		}
+	},
+	"about": {
+		"sectionLabel": "About",
+		"heading": "A little about me.",
+		"paragraphs": [
+			"I'm a Full-Stack Developer from Brazil with a front-end focus and over two years of professional experience. I build production-grade applications — from real-time tablet menus to cross-platform desktop tools — shipped to paying clients.",
+			"Currently I work as the sole front-end developer at Agilizae Tecnologia, where I shipped a full tablet menu application from scratch and led two major platform refactors. In parallel, I run CRATON Software, a boutique software house I founded in November 2025, building custom solutions for small businesses.",
+			"My day-to-day stack is Angular on the front, with React experience, and full-stack capabilities spanning TypeScript APIs, Rust back-ends, and cross-platform desktop apps via Tauri."
+		],
+		"highlights": {
+			"years": "years professional",
+			"projects": "projects in production",
+			"clients": "active clients"
+		},
+		"languagesLabel": "Languages",
+		"languages": [
+			{ "name": "Portuguese", "level": "Native" },
+			{ "name": "English", "level": "Advanced", "detail": "reading & listening · Upper-Intermediate writing & speaking" },
+			{ "name": "Spanish", "level": "Basic" },
+			{ "name": "Italian", "level": "Basic" }
+		]
+	},
+	"experience": {
+		"sectionLabel": "Experience",
+		"heading": "Where I have worked.",
+		"present": "Present",
+		"agilizae": {
+			"role": "Front-End Developer",
+			"description": [
+				"Sole developer of Agilizae Menu — a tablet application for restaurants that lets customers browse the menu and place orders directly from the table, complementing the company flagship management platform.",
+				"Led two complete refactoring cycles (v5 and v6) of the flagship web platform, achieving ~50% faster response times and ~25% smaller bundle size.",
+				"Implemented centralized ThemeService with Angular Signals and Capacitor Preferences, resolving a critical Ionic/TailwindCSS compatibility conflict.",
+				"Proposed and initiated domain-driven (features/) architecture migration, improving long-term maintainability."
+			]
+		},
+		"craton": {
+			"role": "Founder & Lead Developer",
+			"description": [
+				"Founded CRATON Software in November 2025 — a boutique software house focused on custom solutions for small businesses and liberal professionals. Projects dating back to 2024.",
+				"Built and deployed Simone Control — a cross-platform fiscal and inventory management desktop app — serving a production client with an active subscription.",
+				"Built Doceria Sueli — a full ERP for a confectionery business, covering stock, recipes, production, sales, and cash flow, with the entire database and API layer written in pure Rust.",
+				"Developed and deployed professional websites with SEO management for legal professionals."
+			]
+		}
+	},
+	"projects": {
+		"sectionLabel": "Projects",
+		"heading": "Things I have shipped.",
+		"status": {
+			"production": "Production",
+			"development": "In Development",
+			"archived": "Archived"
+		},
+		"sourceLabel": "source code",
+		"liveLabel": "live site",
+		"doceria-sueli": {
+			"name": "Doceria Sueli ERP",
+			"description": "Full ERP system for a confectionery business — from inventory and recipes to production, sales, and cash flow.",
+			"longDescription": "Complete ERP built for a confectionery establishment. Covers the full operational cycle: stock and packaging control, recipe management, production planning, product separation, customer management, sales, and cash flow. The entire database and API layer is written in pure Rust, delivering an extremely robust, modern, and compact system."
+		},
+		"simone-control": {
+			"name": "Simone Control",
+			"description": "Cross-platform fiscal and inventory management desktop application for small retail businesses.",
+			"longDescription": "Handles inventory control, fiscal notes (NF-e), and financial reporting. Currently in production with an active paying client under CRATON Software. Originally built with ReactJS, JavaScript, and MySQL. Rewritten in v2 with Tauri, Rust, Angular, and PostgreSQL for improved performance and cross-platform distribution."
+		},
+		"agilizae-menu": {
+			"name": "Agilizae Menu",
+			"description": "Tablet application for restaurants where customers can browse the digital menu and place orders directly from the table.",
+			"longDescription": "Built from scratch as sole developer at Agilizae Tecnologia. A tablet-based complement to the company flagship management platform — customers browse items and place orders at the table in real time. Currently live with active clients."
+		},
+		"dra-maria-fernanda": {
+			"name": "Dra. Maria Fernanda Vetere",
+			"description": "Professional website for a practicing attorney, with SEO management and Google Search Console integration."
+		},
+		"portfolio": {
+			"name": "luiz.craton.com.br",
+			"description": "Personal portfolio built with Next.js 16, TypeScript, and TailwindCSS 4. Features CI/CD via GitHub Actions, automated code quality gates, and production deployment on Vercel.",
+			"longDescription": "Architected from scratch with professional tooling: ESLint, Prettier, Husky git hooks with commitlint, lint-staged, and a full CI pipeline. The data layer is fully typed and decoupled from components."
+		},
+		"jovens-advogados": {
+			"name": "Legal Office Management System",
+			"description": "Web-based management system for young attorneys, developed as an academic extension project at Universidade Cruzeiro do Sul."
+		}
+	},
+	"skills": {
+		"sectionLabel": "Skills",
+		"heading": "What I work with.",
+		"subheading": "Proficiency is relative — every technology listed here has shipped to production in some capacity.",
+		"categories": {
+			"languages": "Languages",
+			"frameworks": "Frameworks & Runtimes",
+			"styling": "Styling",
+			"databases": "Databases",
+			"devops": "DevOps & Cloud",
+			"tools": "Tools"
+		},
+		"levels": {
+			"proficient": "Proficient",
+			"experienced": "Experienced",
+			"familiar": "Familiar"
+		}
+	},
+	"education": {
+		"sectionLabel": "Education",
+		"heading": "Academic background.",
+		"present": "Present",
+		"cruzeiro-do-sul": {
+			"degree": "Bachelor of Science in Computer Science",
+			"mode": "Distance learning (EAD)",
+			"note": "Currently in 5th semester · Expected graduation Dec 2027"
+		},
+		"ifsuldeminas": {
+			"degree": "Technical Degree in Informatics (Integrated High School)",
+			"note": "Academic Monitor in Physics · Programming competitions 2018–2019"
+		}
+	},
+	"contact": {
+		"sectionLabel": "Contact",
+		"heading": "Let's work together.",
+		"subheading": "Open to freelance projects, front-end roles, internship opportunities with international teams, and interesting collaborations.",
+		"emailLabel": "Email",
+		"elsewhereLabel": "Elsewhere",
+		"copyEmail": "Copy email address",
+		"emailCopied": "Email copied"
+	},
+	"footer": {
+		"backToTop": "Back to top"
+	}
+}
