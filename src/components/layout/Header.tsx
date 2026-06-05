@@ -3,22 +3,16 @@
 import { useState, useEffect } from 'react';
 import type { JSX } from 'react';
 import { Menu, X, Sun, Moon } from 'lucide-react';
-import { useTranslations, useLocale } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 import { useActiveSection } from '@/hooks/useActiveSection';
 import { useTheme } from '@/hooks/useTheme';
-import { useRouter, usePathname } from '@/i18n/navigation';
+import { LocaleSwitcher } from '@/components/ui/LocaleSwitcher';
 
 const SECTION_IDS = ['about', 'experience', 'projects', 'skills', 'education', 'contact'];
 
-const LOCALES = ['en', 'pt'] as const;
-
 export function Header(): JSX.Element {
 	const t = useTranslations('nav');
-	const locale = useLocale();
-	const router = useRouter();
-	const pathname = usePathname();
-
 	const [scrolled, setScrolled] = useState(false);
 	const [menuOpen, setMenuOpen] = useState(false);
 	const activeSection = useActiveSection(SECTION_IDS);
@@ -71,20 +65,7 @@ export function Header(): JSX.Element {
 					</nav>
 
 					<div className='flex items-center gap-1'>
-						<div className='text-foreground/40 mr-1 flex items-center gap-0.5 font-mono text-xs font-medium'>
-							{LOCALES.map((loc, i) => (
-								<span key={loc} className='flex items-center'>
-									{i > 0 && <span className='text-foreground/20 mx-1'>|</span>}
-									<button
-										type='button'
-										onClick={() => router.replace(pathname, { locale: loc })}
-										aria-label={`Switch to ${loc === 'en' ? 'English' : 'Português'}`}
-										className={cn('rounded px-1 py-0.5 uppercase transition-colors', locale === loc ? 'text-accent font-semibold' : 'hover:text-foreground/70')}>
-										{loc}
-									</button>
-								</span>
-							))}
-						</div>
+						<LocaleSwitcher />
 
 						<button
 							type='button'

@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import { Syne, Outfit } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
@@ -15,7 +16,7 @@ import '../globals.css';
 const syne = Syne({ subsets: ['latin'], variable: '--font-syne', display: 'swap' });
 const outfit = Outfit({ subsets: ['latin'], variable: '--font-outfit', display: 'swap' });
 
-// Synchronous blocking script — sets .dark/.light on <html> before first paint.
+// Sets .dark/.light on <html> before first paint to avoid FOUC.
 const themeScript = `(function(){try{var s=localStorage.getItem('theme');if(s==='dark'){document.documentElement.classList.add('dark')}else if(s==='light'){document.documentElement.classList.add('light')}else if(!s&&window.matchMedia('(prefers-color-scheme: dark)').matches){document.documentElement.classList.add('dark')}}catch(e){}})()`;
 
 interface LayoutProps {
@@ -55,9 +56,13 @@ export default async function LocaleLayout({ children, params }: LayoutProps): P
 	const messages = await getMessages();
 
 	return (
-		<html lang={locale} className={cn(syne.variable, outfit.variable)} suppressHydrationWarning>
+		<html lang={locale} data-scroll-behavior='smooth' className={cn(syne.variable, outfit.variable)} suppressHydrationWarning>
+			<head>
+				<Script id='theme-init' strategy='beforeInteractive'>
+					{themeScript}
+				</Script>
+			</head>
 			<body className='antialiased'>
-				<script dangerouslySetInnerHTML={{ __html: themeScript }} />
 				<NextIntlClientProvider messages={messages}>
 					<ThemeProvider>
 						<Header />
